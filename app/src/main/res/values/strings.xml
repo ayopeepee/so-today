@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">So Today</string>
+    <string name="today">Сегодня</string>
+    <string name="also_today">Также сегодня</string>
 </resources>
