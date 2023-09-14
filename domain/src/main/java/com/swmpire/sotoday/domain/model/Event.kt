@@ -1,6 +1,6 @@
-package com.swmpire.sotoday.data.model
+package com.swmpire.sotoday.domain.model
 
-data class Date(
+data class Event(
     val day: String,
     val month: String,
     val name: String

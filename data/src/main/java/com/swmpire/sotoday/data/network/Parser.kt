@@ -8,10 +8,11 @@ class Parser {
         val data = mutableListOf<String>()
         val doc = Jsoup.connect(url).get()
         val days = doc.select("div.main")
-        days.forEach { _ ->
+        for (i in 0 until days.size) {
             data.add(days
-                    .select("span")
-                    .text())
+                .select("span")
+                .eq(i)
+                .text())
         }
         return data
     }

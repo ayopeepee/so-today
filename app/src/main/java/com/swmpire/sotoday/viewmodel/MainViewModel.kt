@@ -4,17 +4,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.swmpire.sotoday.domain.usecase.GetTodayUseCase
+import com.swmpire.sotoday.domain.model.Event
+import com.swmpire.sotoday.domain.usecase.GetTodayEventUseCase
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val getTodayUseCase: GetTodayUseCase) : ViewModel() {
+class MainViewModel(
+    private val getTodayEventUseCase: GetTodayEventUseCase) : ViewModel() {
 
-    private val _liveData = MutableLiveData<List<String>?>()
-    val liveData: LiveData<List<String>?> get() = _liveData
+    private val _liveData = MutableLiveData<Event?>()
+    val liveData: LiveData<Event?> get() = _liveData
 
     fun fetchData() {
         viewModelScope.launch {
-            _liveData.value = getTodayUseCase()
+            _liveData.value = getTodayEventUseCase.invoke()
         }
     }
 }

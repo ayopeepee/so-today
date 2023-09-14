@@ -4,7 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.swmpire.sotoday.data.network.Parser
 import com.swmpire.sotoday.data.repository.DateRepositoryImpl
-import com.swmpire.sotoday.domain.usecase.GetTodayUseCase
+import com.swmpire.sotoday.domain.usecase.GetTodayAllEventsUseCase
+import com.swmpire.sotoday.domain.usecase.GetTodayEventUseCase
 
 class MainViewModelFactory : ViewModelProvider.Factory {
 
@@ -12,11 +13,14 @@ class MainViewModelFactory : ViewModelProvider.Factory {
         DateRepositoryImpl(parser = Parser())
     }
 
-    private val getTodayUseCase by lazy(LazyThreadSafetyMode.NONE) {
-        GetTodayUseCase(dateRepository = dateRepository)
+
+    private val getTodayEventUseCase by lazy(LazyThreadSafetyMode.NONE) {
+        GetTodayEventUseCase(dateRepository = dateRepository)
     }
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return MainViewModel(getTodayUseCase = getTodayUseCase) as T
+        return MainViewModel(
+            getTodayEventUseCase = getTodayEventUseCase
+        ) as T
     }
 }
