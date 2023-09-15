@@ -16,7 +16,11 @@ class GetTodayAllEventsUseCase(private val dateRepository: DateRepository) {
         val url = "https://kakoysegodnyaprazdnik.ru/baza/$monthInRussian/$day"
 
         val response = dateRepository.getToday(url)
-        return response.map { Event(day.toString(), month.toString(), it) }
+        val listWithoutFirstElem: MutableList<String> = response.toMutableList()
+        if (listWithoutFirstElem.isNotEmpty()) {
+            listWithoutFirstElem.removeAt(0)
+        }
+        return listWithoutFirstElem.map { Event(day.toString(), month.toString(), it) }
     }
     }
 

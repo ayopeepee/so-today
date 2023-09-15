@@ -7,7 +7,7 @@ import com.swmpire.sotoday.data.repository.DateRepositoryImpl
 import com.swmpire.sotoday.domain.usecase.GetTodayAllEventsUseCase
 import com.swmpire.sotoday.domain.usecase.GetTodayEventUseCase
 
-class MainViewModelFactory : ViewModelProvider.Factory {
+class EventViewModelFactory : ViewModelProvider.Factory {
 
     private val dateRepository by lazy(LazyThreadSafetyMode.NONE) {
         DateRepositoryImpl(parser = Parser())
@@ -18,9 +18,14 @@ class MainViewModelFactory : ViewModelProvider.Factory {
         GetTodayEventUseCase(dateRepository = dateRepository)
     }
 
+    private val getTodayAllEventsUseCase by lazy(LazyThreadSafetyMode.NONE) {
+        GetTodayAllEventsUseCase(dateRepository = dateRepository)
+    }
+
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return MainViewModel(
-            getTodayEventUseCase = getTodayEventUseCase
+        return EventViewModel(
+            getTodayEventUseCase = getTodayEventUseCase,
+            getTodayAllEventsUseCase = getTodayAllEventsUseCase
         ) as T
     }
 }

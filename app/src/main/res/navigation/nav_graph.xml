@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/todayEventFragment">
+
+    <fragment
+        android:id="@+id/todayEventFragment"
+        android:name="com.swmpire.sotoday.ui.fragment.TodayEventFragment"
+        android:label="fragment_today_event"
+        tools:layout="@layout/fragment_today_event" >
+        <action
+            android:id="@+id/action_todayEventFragment_to_todayAllEventsFragment"
+            app:destination="@id/todayAllEventsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/todayAllEventsFragment"
+        android:name="com.swmpire.sotoday.ui.fragment.TodayAllEventsFragment"
+        android:label="fragment_today_all_events"
+        tools:layout="@layout/fragment_today_all_events" />
+</navigation>

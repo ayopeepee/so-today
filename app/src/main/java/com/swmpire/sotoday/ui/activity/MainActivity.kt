@@ -2,37 +2,42 @@ package com.swmpire.sotoday.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.swmpire.sotoday.databinding.ActivityMainBinding
-import com.swmpire.sotoday.viewmodel.MainViewModel
-import com.swmpire.sotoday.viewmodel.MainViewModelFactory
+import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.swmpire.sotoday.R
+import com.swmpire.sotoday.ui.fragment.TodayAllEventsFragment
+import com.swmpire.sotoday.ui.fragment.TodayEventFragment
 
 class MainActivity : AppCompatActivity() {
 
-    private var _binding: ActivityMainBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var bottomNav: BottomNavigationView
 
-    private lateinit var vm: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
 
-        vm = ViewModelProvider(this, MainViewModelFactory())
-            .get(MainViewModel::class.java)
+        bottomNav = findViewById(R.id.bottom_menu)
 
-        vm.liveData.observe(this, Observer { text ->
-            binding.textviewDay.text = text?.name
-        })
+        bottomNav.setOnItemSelectedListener {
+            when(it.itemId) {
+                R.id.home -> {
+                    loadFragment(TodayEventFragment())
+                    true
+                }
+                R.id.list -> {
+                    loadFragment(TodayAllEventsFragment())
+                    true
+                }
 
-        vm.fetchData()
-
+                else -> {true}
+            }
+        }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
+    private fun loadFragment(fragment: Fragment){
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.nav_host_fragment_container,fragment)
+        transaction.commit()
     }
 
 }
