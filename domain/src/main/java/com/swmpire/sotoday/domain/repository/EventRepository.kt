@@ -1,6 +1,6 @@
 package com.swmpire.sotoday.domain.repository
 
-interface DateRepository {
+interface EventRepository {
 
     suspend fun getToday(url: String) : List<String>
 

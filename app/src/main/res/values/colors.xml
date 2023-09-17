@@ -8,4 +8,9 @@
     <color name="white">#FDFDFD</color>
 
     <color name="menu_background">#EDEDED</color>
+
+    <color name="grey">#7B7A7B</color>
+    <color name="light_grey">#A7A5A7</color>
+    <color name="very_light_grey">#F2F2F2</color>
+    <color name="purple">#8B6EE8</color>
 </resources>
