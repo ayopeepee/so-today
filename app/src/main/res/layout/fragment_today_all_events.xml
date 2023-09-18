@@ -49,6 +49,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_view_date"
+        android:layout_marginTop="8dp"
         app:layoutManager="LinearLayoutManager"
         tools:listitem="@layout/item_day" />
 

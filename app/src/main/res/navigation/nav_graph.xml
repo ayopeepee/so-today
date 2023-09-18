@@ -9,11 +9,7 @@
         android:id="@+id/todayEventFragment"
         android:name="com.swmpire.sotoday.ui.fragment.TodayEventFragment"
         android:label="fragment_today_event"
-        tools:layout="@layout/fragment_today_event" >
-        <action
-            android:id="@+id/action_todayEventFragment_to_todayAllEventsFragment"
-            app:destination="@id/todayAllEventsFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_today_event" />
     <fragment
         android:id="@+id/todayAllEventsFragment"
         android:name="com.swmpire.sotoday.ui.fragment.TodayAllEventsFragment"
