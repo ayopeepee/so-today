@@ -1,21 +1,16 @@
 package com.swmpire.sotoday.ui.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.swmpire.sotoday.R
 import com.swmpire.sotoday.adapter.EventAdapter
 import com.swmpire.sotoday.databinding.FragmentTodayAllEventsBinding
-import com.swmpire.sotoday.databinding.FragmentTodayEventBinding
-import com.swmpire.sotoday.domain.model.Event
 import com.swmpire.sotoday.viewmodel.EventViewModel
-import com.swmpire.sotoday.viewmodel.EventViewModelFactory
 import java.util.Date
 
 
@@ -28,9 +23,6 @@ class TodayAllEventsFragment : Fragment() {
 
     private val sharedViewModel: EventViewModel by activityViewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

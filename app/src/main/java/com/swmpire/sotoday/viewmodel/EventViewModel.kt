@@ -11,10 +11,13 @@ import com.swmpire.sotoday.domain.usecase.GetDateUseCase
 import com.swmpire.sotoday.domain.usecase.GetEventByDateUseCase
 import com.swmpire.sotoday.domain.usecase.GetTodayAllEventsUseCase
 import com.swmpire.sotoday.domain.usecase.GetTodayEventUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.Date
+import javax.inject.Inject
 
-class EventViewModel(
+@HiltViewModel
+class EventViewModel @Inject constructor(
     private val getTodayEventUseCase: GetTodayEventUseCase,
     private val getTodayAllEventsUseCase: GetTodayAllEventsUseCase,
     private val getEventByDateUseCase: GetEventByDateUseCase,

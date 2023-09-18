@@ -1,10 +1,11 @@
 package com.swmpire.sotoday.data.network
 
 import org.jsoup.Jsoup
+import javax.inject.Inject
 
-class Parser {
+class Parser @Inject constructor() {
 
-    suspend fun getData(url : String) : MutableList<String> {
+    fun getData(url : String) : MutableList<String> {
         val data = mutableListOf<String>()
         val doc = Jsoup.connect(url).get()
         val days = doc.select("div.main")
