@@ -1,7 +1,11 @@
 package com.swmpire.sotoday.domain.repository
 
+import java.util.Date
+
 interface DateRepository {
 
-    suspend fun getToday(url: String) : List<String>
+    suspend fun getEventList(url: String) : MutableList<String>
+
+    suspend fun getDayAndWeekday(date: Date) : String
 
 }

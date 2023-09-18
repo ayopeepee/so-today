@@ -3,12 +3,16 @@ package com.swmpire.sotoday.domain.usecase
 import com.swmpire.sotoday.domain.model.Event
 import com.swmpire.sotoday.domain.repository.DateRepository
 import java.util.Calendar
+import java.util.Date
 
-class GetTodayEventUseCase(private val dateRepository: DateRepository) {
+class GetAllEventsByDateUseCase(private val dateRepository: DateRepository) {
 
-    suspend operator fun invoke(): Event {
+    suspend operator fun invoke(date: Date): MutableList<Event> {
 
-        val calendar = Calendar.getInstance()
+        val calendar = Calendar.getInstance().apply {
+            time = date
+        }
+
         val day = calendar.get(Calendar.DAY_OF_MONTH)
         val month = calendar.get(Calendar.MONTH)
 
@@ -16,8 +20,10 @@ class GetTodayEventUseCase(private val dateRepository: DateRepository) {
         val url = "https://kakoysegodnyaprazdnik.ru/baza/$monthInRussian/$day"
 
         val response = dateRepository.getEventList(url)
-        return Event(day.toString(), month.toString(), response.first())
+
+        return response.map { Event(day.toString(), month.toString(), it) }.toMutableList()
     }
+
 
     private fun getMonthInRussian(month: Int): String {
         val monthsInRussian = arrayOf(

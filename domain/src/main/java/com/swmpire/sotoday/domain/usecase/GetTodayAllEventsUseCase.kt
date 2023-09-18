@@ -6,7 +6,7 @@ import java.util.Calendar
 
 class GetTodayAllEventsUseCase(private val dateRepository: DateRepository) {
 
-    suspend operator fun invoke() : List<Event> {
+    suspend operator fun invoke(): MutableList<Event> {
 
         val calendar = Calendar.getInstance()
         val day = calendar.get(Calendar.DAY_OF_MONTH)
@@ -15,13 +15,8 @@ class GetTodayAllEventsUseCase(private val dateRepository: DateRepository) {
         val monthInRussian = getMonthInRussian(month)
         val url = "https://kakoysegodnyaprazdnik.ru/baza/$monthInRussian/$day"
 
-        val response = dateRepository.getToday(url)
-        val listWithoutFirstElem: MutableList<String> = response.toMutableList()
-        if (listWithoutFirstElem.isNotEmpty()) {
-            listWithoutFirstElem.removeAt(0)
-        }
-        return listWithoutFirstElem.map { Event(day.toString(), month.toString(), it) }
-    }
+        val response = dateRepository.getEventList(url)
+        return response.map { Event(day.toString(), month.toString(), it) }.toMutableList()
     }
 
 
@@ -31,4 +26,5 @@ class GetTodayAllEventsUseCase(private val dateRepository: DateRepository) {
             "iyul", "avgust", "sentyabr", "oktyabr", "noyabr", "dekabr"
         )
         return monthsInRussian[month]
+    }
 }

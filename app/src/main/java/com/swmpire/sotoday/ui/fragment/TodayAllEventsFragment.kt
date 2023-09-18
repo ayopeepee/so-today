@@ -8,12 +8,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.swmpire.sotoday.R
 import com.swmpire.sotoday.adapter.EventAdapter
 import com.swmpire.sotoday.databinding.FragmentTodayAllEventsBinding
 import com.swmpire.sotoday.databinding.FragmentTodayEventBinding
+import com.swmpire.sotoday.domain.model.Event
 import com.swmpire.sotoday.viewmodel.EventViewModel
 import com.swmpire.sotoday.viewmodel.EventViewModelFactory
+import java.util.Date
 
 
 class TodayAllEventsFragment : Fragment() {
@@ -23,30 +26,48 @@ class TodayAllEventsFragment : Fragment() {
 
     private lateinit var adapter: EventAdapter
 
-    private lateinit var sharedViewModel: EventViewModel
+    private val sharedViewModel: EventViewModel by activityViewModels()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentTodayAllEventsBinding.inflate(inflater, container, false)
-
-        sharedViewModel = ViewModelProvider(requireActivity(), EventViewModelFactory()).get(EventViewModel::class.java)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = EventAdapter()
-        val recyclerView = binding.recyclerview
-        recyclerView.adapter = adapter
-        recyclerView.setHasFixedSize(true)
+        adapter = EventAdapter(mutableListOf())
+        binding.recyclerview.adapter = adapter
 
         sharedViewModel.allEvents.observe(viewLifecycleOwner, Observer {events ->
-            adapter.differ.submitList(events)
+            adapter.updateEventList(events)
+            binding.recyclerview.adapter = adapter
         })
+
+        sharedViewModel.date.observe(viewLifecycleOwner, Observer { date ->
+            binding.textViewDate.text = "${date.split(", ").first()},"
+            binding.textViewWeekDay.text = date.split(",").last()
+        })
+
+        binding.buttonSelectDate.setOnClickListener {
+            val datePicker = MaterialDatePicker.Builder
+                .datePicker()
+                .setTitleText("Выберите дату")
+                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                .build()
+
+            datePicker.show(parentFragmentManager, "tag")
+
+            datePicker.addOnPositiveButtonClickListener {
+                sharedViewModel.fetchData(Date(it))
+            }
+        }
     }
 
     override fun onDestroyView() {

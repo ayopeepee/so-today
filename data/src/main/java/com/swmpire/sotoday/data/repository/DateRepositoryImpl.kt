@@ -5,13 +5,22 @@ import com.swmpire.sotoday.domain.repository.DateRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class DateRepositoryImpl(private val parser: Parser) : DateRepository {
 
-    override suspend fun getToday(url: String): List<String> {
+    override suspend fun getEventList(url: String): MutableList<String> {
         return withContext(Dispatchers.IO) {
             parser.getData(url)
         }
+    }
+
+    override suspend fun getDayAndWeekday(date: Date): String {
+        val dateFormat = SimpleDateFormat("dd MMMM, EEEE", Locale.getDefault())
+        return dateFormat.format(date)
     }
 
 
