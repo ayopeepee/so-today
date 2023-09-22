@@ -45,6 +45,15 @@
         android:layout_marginStart="4dp"
         android:background="@drawable/ic_arrow_down"/>
 
+    <ImageButton
+        android:id="@+id/button_notification"
+        android:tag="off"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/ic_notification_off"/>
+
     <TextView
         android:id="@+id/text_view_event"
         android:layout_width="match_parent"
