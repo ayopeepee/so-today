@@ -15,8 +15,8 @@ class GetTodayEventUseCase(private val dateRepository: DateRepository) {
         val monthInRussian = getMonthInRussian(month)
         val url = "https://kakoysegodnyaprazdnik.ru/baza/$monthInRussian/$day"
 
-        val response = dateRepository.getEventList(url)
-        return Event(day.toString(), month.toString(), response.first())
+        val response = dateRepository.getEvent(url)
+        return Event(day.toString(), month.toString(), response)
     }
 
     private fun getMonthInRussian(month: Int): String {

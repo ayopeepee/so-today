@@ -4,8 +4,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_text">А сегодня</string>
     <string name="also_today">А ещё сегодня</string>
-    <string name="title_notification_reminder">Сегодня, а потом только через год</string>
-    <string name="description_notification_reminder">Скоро даже не нужно будет в приложение заходить</string>
+    <string name="title_notification_reminder">С праздником!</string>
+    <string name="description_notification_reminder">Ведь каждый день - праздник, так?</string>
     <string name="reminders_notification_channel_id">123</string>
     <string name="reminders_notification_channel_name">channel name</string>
 </resources>

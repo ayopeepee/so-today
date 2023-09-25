@@ -1,12 +1,15 @@
 package com.swmpire.sotoday.di
 
 import com.swmpire.sotoday.domain.repository.DateRepository
+import com.swmpire.sotoday.domain.repository.NotificationRepository
 import com.swmpire.sotoday.domain.usecase.GetAllEventsByDateUseCase
 import com.swmpire.sotoday.domain.usecase.GetCurrentDateUseCase
 import com.swmpire.sotoday.domain.usecase.GetDateUseCase
 import com.swmpire.sotoday.domain.usecase.GetEventByDateUseCase
+import com.swmpire.sotoday.domain.usecase.GetNotificationStateUseCase
 import com.swmpire.sotoday.domain.usecase.GetTodayAllEventsUseCase
 import com.swmpire.sotoday.domain.usecase.GetTodayEventUseCase
+import com.swmpire.sotoday.domain.usecase.SetNotificationUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,4 +42,12 @@ class DomainModule {
     @Provides
     fun provideGetDateUseCase(dateRepository: DateRepository)
     : GetDateUseCase = GetDateUseCase(dateRepository = dateRepository)
+
+    @Provides
+    fun provideGetNotificationStateUseCase(notificationRepository: NotificationRepository)
+    : GetNotificationStateUseCase = GetNotificationStateUseCase(notificationRepository = notificationRepository)
+
+    @Provides
+    fun provideSetNotificationUseCase(notificationRepository: NotificationRepository)
+    : SetNotificationUseCase = SetNotificationUseCase(notificationRepository = notificationRepository)
 }

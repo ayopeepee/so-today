@@ -11,9 +11,11 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.swmpire.sotoday.adapter.EventAdapter
 import com.swmpire.sotoday.databinding.FragmentTodayAllEventsBinding
 import com.swmpire.sotoday.viewmodel.EventViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.Date
 
 
+@AndroidEntryPoint
 class TodayAllEventsFragment : Fragment() {
 
     private var _binding: FragmentTodayAllEventsBinding? = null

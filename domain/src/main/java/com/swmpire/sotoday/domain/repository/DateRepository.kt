@@ -8,4 +8,6 @@ interface DateRepository {
 
     suspend fun getDayAndWeekday(date: Date) : String
 
+    suspend fun getEvent(url: String) : String
+
 }

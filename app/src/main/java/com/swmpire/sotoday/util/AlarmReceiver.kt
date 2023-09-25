@@ -19,10 +19,9 @@ class AlarmReceiver : BroadcastReceiver() {
 
         notificationManager.sendReminderNotification(
             applicationContext = context,
-            channelId = context.getString(R.string.reminders_notification_channel_id),
-            reminderText = intent.getStringExtra("reminderText") ?: "Some day"
+            channelId = context.getString(R.string.reminders_notification_channel_id)
         )
-        // Remove this line if you don't want to reschedule the reminder
+        // reschedule the reminder
         ReminderManager.startReminder(context.applicationContext)
     }
 
@@ -32,7 +31,6 @@ class AlarmReceiver : BroadcastReceiver() {
 fun NotificationManager.sendReminderNotification(
     applicationContext: Context,
     channelId: String,
-    reminderText: String
 ) {
     val contentIntent = Intent(applicationContext, MainActivity::class.java)
     val pendingIntent = PendingIntent.getActivity(
@@ -43,12 +41,8 @@ fun NotificationManager.sendReminderNotification(
     )
     val builder = NotificationCompat.Builder(applicationContext, channelId)
         .setContentTitle(applicationContext.getString(R.string.title_notification_reminder))
-        .setContentText(reminderText)
+        .setContentText(applicationContext.getString(R.string.description_notification_reminder))
         .setSmallIcon(R.drawable.ic_launcher_foreground)
-        .setStyle(
-            NotificationCompat.BigTextStyle()
-                .bigText(applicationContext.getString(R.string.description_notification_reminder))
-        )
         .setContentIntent(pendingIntent)
         .setAutoCancel(true)
 

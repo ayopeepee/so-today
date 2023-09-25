@@ -15,15 +15,13 @@ object ReminderManager {
     fun startReminder(
         context: Context,
         reminderTime: String = "08:00",
-        reminderText: String = "Some day",
         reminderId: Int = REMINDER_NOTIFICATION_REQUEST_CODE
     ) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         val (hours, min) = reminderTime.split(":").map { it.toInt() }
         val intent =
-            Intent(context.applicationContext, AlarmReceiver::class.java).let { intent ->
-                intent.putExtra("reminderText", reminderText)
+            Intent(context.applicationContext, AlarmReceiver::class.java).let {intent ->
                 PendingIntent.getBroadcast(
                     context.applicationContext,
                     reminderId,
