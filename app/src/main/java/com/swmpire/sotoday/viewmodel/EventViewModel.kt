@@ -1,5 +1,6 @@
 package com.swmpire.sotoday.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,11 +10,14 @@ import com.swmpire.sotoday.domain.usecase.GetAllEventsByDateUseCase
 import com.swmpire.sotoday.domain.usecase.GetCurrentDateUseCase
 import com.swmpire.sotoday.domain.usecase.GetDateUseCase
 import com.swmpire.sotoday.domain.usecase.GetEventByDateUseCase
+import com.swmpire.sotoday.domain.usecase.GetEventInEnglishUseCase
 import com.swmpire.sotoday.domain.usecase.GetNotificationStateUseCase
 import com.swmpire.sotoday.domain.usecase.GetTodayAllEventsUseCase
 import com.swmpire.sotoday.domain.usecase.GetTodayEventUseCase
 import com.swmpire.sotoday.domain.usecase.SetNotificationUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.util.Date
 import javax.inject.Inject
@@ -27,7 +31,8 @@ class EventViewModel @Inject constructor(
     private val getCurrentDateUseCase: GetCurrentDateUseCase,
     private val getDateUseCase: GetDateUseCase,
     private val getNotificationStateUseCase: GetNotificationStateUseCase,
-    private val setNotificationUseCase: SetNotificationUseCase
+    private val setNotificationUseCase: SetNotificationUseCase,
+    private val getEventInEnglishUseCase: GetEventInEnglishUseCase
 ) : ViewModel() {
 
     private val _event = MutableLiveData<Event?>()
@@ -50,6 +55,7 @@ class EventViewModel @Inject constructor(
             _date.value = getCurrentDateUseCase.invoke()
             _event.value = getTodayEventUseCase.invoke()
             _allEvents.value = getTodayAllEventsUseCase.invoke()
+            Log.d("TAG", "fetchCurrentData: ${getEventInEnglishUseCase.invoke("кот")}")
         }
     }
 

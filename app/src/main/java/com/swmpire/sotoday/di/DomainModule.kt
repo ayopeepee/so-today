@@ -2,10 +2,12 @@ package com.swmpire.sotoday.di
 
 import com.swmpire.sotoday.domain.repository.DateRepository
 import com.swmpire.sotoday.domain.repository.NotificationRepository
+import com.swmpire.sotoday.domain.repository.TranslateRepository
 import com.swmpire.sotoday.domain.usecase.GetAllEventsByDateUseCase
 import com.swmpire.sotoday.domain.usecase.GetCurrentDateUseCase
 import com.swmpire.sotoday.domain.usecase.GetDateUseCase
 import com.swmpire.sotoday.domain.usecase.GetEventByDateUseCase
+import com.swmpire.sotoday.domain.usecase.GetEventInEnglishUseCase
 import com.swmpire.sotoday.domain.usecase.GetNotificationStateUseCase
 import com.swmpire.sotoday.domain.usecase.GetTodayAllEventsUseCase
 import com.swmpire.sotoday.domain.usecase.GetTodayEventUseCase
@@ -50,4 +52,8 @@ class DomainModule {
     @Provides
     fun provideSetNotificationUseCase(notificationRepository: NotificationRepository)
     : SetNotificationUseCase = SetNotificationUseCase(notificationRepository = notificationRepository)
+
+    @Provides
+    fun provideGetEventInEnglishUseCase(translateRepository: TranslateRepository)
+    : GetEventInEnglishUseCase = GetEventInEnglishUseCase(translateRepository = translateRepository)
 }

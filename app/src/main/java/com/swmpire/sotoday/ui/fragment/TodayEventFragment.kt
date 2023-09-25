@@ -15,6 +15,7 @@ import com.google.android.material.timepicker.MaterialTimePicker.INPUT_MODE_CLOC
 import com.google.android.material.timepicker.TimeFormat
 import com.swmpire.sotoday.R
 import com.swmpire.sotoday.databinding.FragmentTodayEventBinding
+import com.swmpire.sotoday.domain.usecase.GetEventInEnglishUseCase
 import com.swmpire.sotoday.util.ReminderManager
 import com.swmpire.sotoday.viewmodel.EventViewModel
 import dagger.hilt.android.AndroidEntryPoint
