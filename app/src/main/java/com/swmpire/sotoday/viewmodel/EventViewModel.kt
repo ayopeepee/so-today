@@ -4,7 +4,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
+import com.swmpire.sotoday.data.repository.UnsplashRepository
 import com.swmpire.sotoday.domain.model.Event
 import com.swmpire.sotoday.domain.usecase.GetAllEventsByDateUseCase
 import com.swmpire.sotoday.domain.usecase.GetCurrentDateUseCase
@@ -32,7 +35,8 @@ class EventViewModel @Inject constructor(
     private val getDateUseCase: GetDateUseCase,
     private val getNotificationStateUseCase: GetNotificationStateUseCase,
     private val setNotificationUseCase: SetNotificationUseCase,
-    private val getEventInEnglishUseCase: GetEventInEnglishUseCase
+    private val getEventInEnglishUseCase: GetEventInEnglishUseCase,
+    private val unsplashRepository: UnsplashRepository
 ) : ViewModel() {
 
     private val _event = MutableLiveData<Event?>()
@@ -47,6 +51,11 @@ class EventViewModel @Inject constructor(
     private val _isNotificationOn = MutableLiveData<Boolean>()
     val isNotificationOn: LiveData<Boolean> get() = _isNotificationOn
 
+    private val currentQuery = MutableLiveData(DEFAULT_QUERY)
+
+    val photos = currentQuery.switchMap { queryString ->
+        unsplashRepository.getSearchResults(queryString).cachedIn(viewModelScope)
+    }
     init {
         _isNotificationOn.value = getNotificationStateUseCase.invoke()
     }
@@ -55,7 +64,7 @@ class EventViewModel @Inject constructor(
             _date.value = getCurrentDateUseCase.invoke()
             _event.value = getTodayEventUseCase.invoke()
             _allEvents.value = getTodayAllEventsUseCase.invoke()
-            Log.d("TAG", "fetchCurrentData: ${getEventInEnglishUseCase.invoke("кот")}")
+            searchPhotos(getEventInEnglishUseCase.invoke(event.value?.name ?: DEFAULT_QUERY))
         }
     }
 
@@ -64,6 +73,7 @@ class EventViewModel @Inject constructor(
             _date.value = getDateUseCase.invoke(date)
             _event.value = getEventByDateUseCase.invoke(date)
             _allEvents.value = getAllEventsByDateUseCase.invoke(date)
+            searchPhotos(getEventInEnglishUseCase.invoke(event.value?.name ?: DEFAULT_QUERY))
         }
     }
 
@@ -75,5 +85,12 @@ class EventViewModel @Inject constructor(
     fun setReminderOff() {
         setNotificationUseCase.invoke(false)
         _isNotificationOn.value = false
+    }
+
+    fun searchPhotos(query: String) {
+        currentQuery.value = query
+    }
+    companion object {
+        private const val DEFAULT_QUERY = "cats"
     }
 }

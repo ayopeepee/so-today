@@ -1,6 +1,6 @@
 package com.swmpire.sotoday.data.repository
 
-import com.swmpire.sotoday.data.network.Parser
+import com.swmpire.sotoday.data.parser.Parser
 import com.swmpire.sotoday.domain.repository.DateRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

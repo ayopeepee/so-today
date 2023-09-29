@@ -9,13 +9,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import com.google.android.material.carousel.CarouselLayoutManager
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.MaterialTimePicker.INPUT_MODE_CLOCK
 import com.google.android.material.timepicker.TimeFormat
 import com.swmpire.sotoday.R
+import com.swmpire.sotoday.adapter.UnsplashPhotoAdapter
 import com.swmpire.sotoday.databinding.FragmentTodayEventBinding
-import com.swmpire.sotoday.domain.usecase.GetEventInEnglishUseCase
 import com.swmpire.sotoday.util.ReminderManager
 import com.swmpire.sotoday.viewmodel.EventViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -62,10 +63,22 @@ class TodayEventFragment : Fragment() {
                 true -> {
                     binding.buttonNotification.setImageResource(R.drawable.ic_notification_on)
                 }
+
                 false -> {
                     binding.buttonNotification.setImageResource(R.drawable.ic_notification_off)
                 }
             }
+        })
+
+        val adapter = UnsplashPhotoAdapter()
+        binding.apply {
+            recyclerview.setHasFixedSize(true)
+            recyclerview.adapter = adapter
+            recyclerview.layoutManager = CarouselLayoutManager()
+        }
+
+        sharedViewModel.photos.observe(viewLifecycleOwner, Observer {
+            adapter.submitData(viewLifecycleOwner.lifecycle, it)
         })
 
         binding.buttonSelectDate.setOnClickListener {

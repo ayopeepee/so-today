@@ -1,6 +1,6 @@
 package com.swmpire.sotoday.di
 
-import com.swmpire.sotoday.data.network.Parser
+import com.swmpire.sotoday.data.parser.Parser
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
