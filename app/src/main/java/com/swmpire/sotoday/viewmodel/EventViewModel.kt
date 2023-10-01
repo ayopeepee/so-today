@@ -19,8 +19,6 @@ import com.swmpire.sotoday.domain.usecase.GetTodayAllEventsUseCase
 import com.swmpire.sotoday.domain.usecase.GetTodayEventUseCase
 import com.swmpire.sotoday.domain.usecase.SetNotificationUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.util.Date
 import javax.inject.Inject
@@ -58,25 +56,46 @@ class EventViewModel @Inject constructor(
     }
     init {
         _isNotificationOn.value = getNotificationStateUseCase.invoke()
-    }
-    fun fetchCurrentData() {
-        viewModelScope.launch {
-            _date.value = getCurrentDateUseCase.invoke()
-            _event.value = getTodayEventUseCase.invoke()
-            _allEvents.value = getTodayAllEventsUseCase.invoke()
-            searchPhotos(getEventInEnglishUseCase.invoke(event.value?.name ?: DEFAULT_QUERY))
-        }
+        fetchCurrentFirstEvent()
+        fetchCurrentEventList()
     }
 
-    fun fetchData(date: Date) {
+    fun fetchFirstEventByDate(date: Date) {
         viewModelScope.launch {
             _date.value = getDateUseCase.invoke(date)
             _event.value = getEventByDateUseCase.invoke(date)
-            _allEvents.value = getAllEventsByDateUseCase.invoke(date)
             searchPhotos(getEventInEnglishUseCase.invoke(event.value?.name ?: DEFAULT_QUERY))
         }
     }
 
+    fun fetchEventListByDate(date: Date) {
+        viewModelScope.launch {
+            _date.value = getDateUseCase.invoke(date)
+            _allEvents.value = getAllEventsByDateUseCase.invoke(date)
+        }
+    }
+
+
+    fun fetchEventByName(name: String) {
+        viewModelScope.launch {
+            _event.value = Event(name)
+            searchPhotos(getEventInEnglishUseCase.invoke(name))
+        }
+    }
+
+    fun fetchCurrentFirstEvent() {
+        viewModelScope.launch {
+            _date.value = getCurrentDateUseCase.invoke()
+            _event.value = getTodayEventUseCase.invoke()
+            searchPhotos(getEventInEnglishUseCase.invoke(event.value?.name ?: DEFAULT_QUERY))
+        }
+    }
+
+    fun fetchCurrentEventList() {
+        viewModelScope.launch {
+            _allEvents.value = getTodayAllEventsUseCase.invoke()
+        }
+    }
     fun setReminderOn() {
         setNotificationUseCase.invoke(true)
         _isNotificationOn.value = true
@@ -87,10 +106,10 @@ class EventViewModel @Inject constructor(
         _isNotificationOn.value = false
     }
 
-    fun searchPhotos(query: String) {
+    private fun searchPhotos(query: String) {
         currentQuery.value = query
     }
     companion object {
-        private const val DEFAULT_QUERY = "cats"
+        private const val DEFAULT_QUERY = ""
     }
 }

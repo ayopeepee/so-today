@@ -1,5 +1,6 @@
 package com.swmpire.sotoday.data.parser
 
+import android.util.Log
 import org.jsoup.Jsoup
 import javax.inject.Inject
 
@@ -19,6 +20,7 @@ class Parser @Inject constructor() {
                 )
             }
         } catch (e: Exception) {
+            Log.e("TAG", "getEventList: can't parse the events")
             return mutableListOf()
         }
 
@@ -30,6 +32,7 @@ class Parser @Inject constructor() {
             val doc = Jsoup.connect(url).timeout(10000).get()
             doc.select("div.main").select("span").eq(0).text()
         } catch (e: Exception) {
+            Log.e("TAG", "getFirstEvent: can't parse the event")
             ""
         }
 

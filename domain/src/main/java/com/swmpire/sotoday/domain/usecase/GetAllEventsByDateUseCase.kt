@@ -21,7 +21,7 @@ class GetAllEventsByDateUseCase(private val dateRepository: DateRepository) {
 
         val response = dateRepository.getEventList(url)
 
-        return response.map { Event(day.toString(), month.toString(), it) }.toMutableList()
+        return response.map { Event(it) }.toMutableList()
     }
 
 

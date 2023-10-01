@@ -9,10 +9,18 @@
         android:id="@+id/todayEventFragment"
         android:name="com.swmpire.sotoday.ui.fragment.TodayEventFragment"
         android:label="fragment_today_event"
-        tools:layout="@layout/fragment_today_event" />
+        tools:layout="@layout/fragment_today_event" >
+        <action
+            android:id="@+id/action_todayEventFragment_to_todayAllEventsFragment"
+            app:destination="@id/todayAllEventsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/todayAllEventsFragment"
         android:name="com.swmpire.sotoday.ui.fragment.TodayAllEventsFragment"
         android:label="fragment_today_all_events"
-        tools:layout="@layout/fragment_today_all_events" />
+        tools:layout="@layout/fragment_today_all_events" >
+        <action
+            android:id="@+id/action_todayAllEventsFragment_to_todayEventFragment"
+            app:destination="@id/todayEventFragment" />
+    </fragment>
 </navigation>

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.swmpire.sotoday.adapter.EventAdapter
 import com.swmpire.sotoday.databinding.FragmentTodayAllEventsBinding
@@ -36,7 +37,11 @@ class TodayAllEventsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = EventAdapter(mutableListOf())
+        adapter = EventAdapter(mutableListOf(), EventAdapter.OnClickListener { name ->
+            sharedViewModel.fetchEventByName(name)
+            val action = TodayAllEventsFragmentDirections.actionTodayAllEventsFragmentToTodayEventFragment()
+            findNavController().navigate(action)
+        })
         binding.recyclerview.adapter = adapter
 
         sharedViewModel.allEvents.observe(viewLifecycleOwner, Observer {events ->
@@ -59,8 +64,13 @@ class TodayAllEventsFragment : Fragment() {
             datePicker.show(parentFragmentManager, "tag")
 
             datePicker.addOnPositiveButtonClickListener {
-                sharedViewModel.fetchData(Date(it))
+                sharedViewModel.fetchEventListByDate(Date(it))
+                sharedViewModel.fetchFirstEventByDate(Date(it))
             }
+        }
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            sharedViewModel.fetchCurrentEventList()
+            binding.swipeRefreshLayout.isRefreshing = false
         }
     }
 

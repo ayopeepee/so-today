@@ -16,7 +16,7 @@ class GetTodayAllEventsUseCase(private val dateRepository: DateRepository) {
         val url = "https://kakoysegodnyaprazdnik.ru/baza/$monthInRussian/$day"
 
         val response = dateRepository.getEventList(url)
-        return response.map { Event(day.toString(), month.toString(), it) }.toMutableList()
+        return response.map { Event(it) }.toMutableList()
     }
 
 

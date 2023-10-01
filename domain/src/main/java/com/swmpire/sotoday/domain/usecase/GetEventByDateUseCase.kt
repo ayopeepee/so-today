@@ -20,8 +20,8 @@ class GetEventByDateUseCase(private val dateRepository: DateRepository) {
 
         val url = "https://kakoysegodnyaprazdnik.ru/baza/$monthInRussian/$day"
 
-        val response = dateRepository.getEventList(url)
-        return Event(day.toString(), month.toString(), response.first())
+        val response = dateRepository.getEvent(url)
+        return Event(response)
 
     }
 

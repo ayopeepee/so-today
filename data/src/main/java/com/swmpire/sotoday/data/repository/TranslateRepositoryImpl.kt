@@ -7,9 +7,14 @@ import me.bush.translator.Translator
 
 class TranslateRepositoryImpl : TranslateRepository {
     override suspend fun getTranslation(text: String): String {
-        val translator = Translator()
-        val translation = translator.translate(text, Language.ENGLISH, Language.RUSSIAN)
-        Log.d("TAG", "getTranslation: ru: ${translation.sourceText} en: ${translation.translatedText}")
-        return translation.translatedText
+        return try {
+            val translator = Translator()
+            val translation = translator.translate(text, Language.ENGLISH, Language.RUSSIAN)
+            Log.d("TAG", "getTranslation: ru: ${translation.sourceText} en: ${translation.translatedText}")
+            translation.translatedText
+        } catch (e: Exception) {
+            Log.e("TAG", "getTranslation: can't translate", )
+            ""
+        }
     }
 }

@@ -1,56 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginStart="24dp"
-    android:layout_marginEnd="24dp"
     android:layout_marginTop="60dp"
+    android:layout_marginEnd="24dp"
+    android:id="@+id/swipe_refresh_layout"
     tools:context=".ui.fragment.TodayAllEventsFragment">
 
-    <TextView
-        android:id="@+id/text_view_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="11 Сентрября,"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:fontFamily="@font/ubuntu_medium"
-        android:textColor="@color/grey"
-        android:textSize="18sp"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
 
-    <TextView
-        android:id="@+id/text_view_week_day"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Понедельник"
-        app:layout_constraintStart_toEndOf="@id/text_view_date"
-        app:layout_constraintBottom_toBottomOf="@id/text_view_date"
-        android:fontFamily="@font/ubuntu_medium"
-        android:textSize="18sp"
-        android:textColor="@color/light_grey"
-        android:layout_marginStart="4dp"/>
+        <TextView
+            android:fontFamily="@font/ubuntu_medium"
+            android:id="@+id/text_view_date"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="@color/grey"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="11 Сентрября," />
 
-
-    <ImageButton
-        android:id="@+id/button_select_date"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        app:layout_constraintStart_toEndOf="@id/text_view_week_day"
-        app:layout_constraintTop_toTopOf="@id/text_view_week_day"
-        android:layout_marginStart="4dp"
-        android:background="@drawable/ic_arrow_down"/>
+        <TextView
+            android:fontFamily="@font/ubuntu_medium"
+            android:id="@+id/text_view_week_day"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/light_grey"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@id/text_view_date"
+            app:layout_constraintStart_toEndOf="@id/text_view_date"
+            tools:text="Понедельник" />
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_view_date"
-        android:layout_marginTop="8dp"
-        app:layoutManager="LinearLayoutManager"
-        tools:listitem="@layout/item_day" />
+        <ImageButton
+            android:background="@drawable/ic_arrow_down"
+            android:id="@+id/button_select_date"
+            android:layout_height="24dp"
+            android:layout_marginStart="4dp"
+            android:layout_width="24dp"
+            app:layout_constraintStart_toEndOf="@id/text_view_week_day"
+            app:layout_constraintTop_toTopOf="@id/text_view_week_day" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            app:layoutManager="LinearLayoutManager"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_date"
+            tools:listitem="@layout/item_day" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+

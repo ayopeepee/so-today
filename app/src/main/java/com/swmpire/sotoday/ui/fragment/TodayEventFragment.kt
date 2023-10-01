@@ -47,8 +47,6 @@ class TodayEventFragment : Fragment() {
             binding.textViewWeekDay.text = date.split(",").last()
         })
 
-        sharedViewModel.fetchCurrentData()
-
         sharedViewModel.event.observe(viewLifecycleOwner, Observer { event ->
             if (event?.name.isNullOrEmpty()) {
                 Toast.makeText(requireContext(), "Проверьте соединение", Toast.LENGTH_SHORT).show()
@@ -94,6 +92,10 @@ class TodayEventFragment : Fragment() {
             }
         }
 
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            sharedViewModel.fetchCurrentFirstEvent()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
 
     }
 
@@ -128,7 +130,8 @@ class TodayEventFragment : Fragment() {
         datePicker.show(parentFragmentManager, "tag")
 
         datePicker.addOnPositiveButtonClickListener {
-            sharedViewModel.fetchData(Date(it))
+            sharedViewModel.fetchFirstEventByDate(Date(it))
+            sharedViewModel.fetchEventListByDate(Date(it))
         }
     }
 
