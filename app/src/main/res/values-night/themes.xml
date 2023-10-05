@@ -1,7 +1,86 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.SoToday" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+
+        <item name="materialCardViewStyle">@style/Widget.App.CardView</item>
+        <item name="textAppearanceTitleLarge">@style/DateTextView</item>
+        <item name="textAppearanceBody1">@style/EventName</item>
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
+        <item name="imageButtonStyle">@style/ImageViewButton</item>
+
+        <item name="colorPrimary">@color/md_theme_dark_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_dark_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_dark_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_dark_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/md_theme_dark_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_dark_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/md_theme_dark_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_dark_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/md_theme_dark_tertiary</item>
+        <item name="colorOnTertiary">@color/md_theme_dark_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/md_theme_dark_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/md_theme_dark_onTertiaryContainer</item>
+        <item name="colorError">@color/md_theme_dark_error</item>
+        <item name="colorErrorContainer">@color/md_theme_dark_errorContainer</item>
+        <item name="colorOnError">@color/md_theme_dark_onError</item>
+        <item name="colorOnErrorContainer">@color/md_theme_dark_onErrorContainer</item>
+        <item name="android:colorBackground">@color/md_theme_dark_background</item>
+        <item name="colorOnBackground">@color/md_theme_dark_onBackground</item>
+        <item name="colorSurface">@color/md_theme_dark_surface</item>
+        <item name="colorOnSurface">@color/md_theme_dark_onSurface</item>
+        <item name="colorSurfaceVariant">@color/md_theme_dark_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_dark_onSurfaceVariant</item>
+        <item name="colorOutline">@color/md_theme_dark_outline</item>
+        <item name="colorOnSurfaceInverse">@color/md_theme_dark_inverseOnSurface</item>
+        <item name="colorSurfaceInverse">@color/md_theme_dark_inverseSurface</item>
+        <item name="colorPrimaryInverse">@color/md_theme_dark_inversePrimary</item>
+
     </style>
+
+    <style name="Widget.App.CardView" parent="Widget.Material3.CardView.Elevated">
+
+        <item name="strokeColor">@color/card_stroke</item>
+        <item name="strokeWidth">1dp</item>
+
+    </style>
+
+    <style name="DateTextView" parent="TextAppearance.AppCompat.Title">
+
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/primary_text_dark</item>
+        <item name="fontFamily">@font/ubuntu_medium</item>
+
+    </style>
+
+    <style name="WeekdayTextView" parent="TextAppearance.AppCompat.Medium">
+
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/secondary_text_dark</item>
+        <item name="fontFamily">@font/ubuntu_medium</item>
+
+    </style>
+
+
+
+    <style name="EventName" parent="TextAppearance.AppCompat.Body1">
+
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/ubuntu_medium</item>
+        <item name="android:textColor">@color/primary_text_dark</item>
+
+    </style>
+
+    <style name="Widget.App.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+
+        <item name="compatShadowEnabled">true</item>
+        <item name="labelVisibilityMode">unlabeled</item>
+
+    </style>
+
+    <style name="ImageViewButton" parent="Widget.AppCompat.ImageButton">
+
+        <item name="backgroundTint">@color/icons_dark</item>
+
+    </style>
+
 </resources>
