@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/ubuntu_medium"
                 android:paddingBottom="16dp"
-                style="@style/EventName"
+                style="@style/ItemEvent"
                 tools:text="День ночи" />
 
             <com.google.android.material.divider.MaterialDivider
@@ -42,7 +42,8 @@
                 android:layout_height="24dp"
                 android:layout_gravity="end"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/ic_arrow_right" />
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_arrow_right" />
 
         </LinearLayout>
 

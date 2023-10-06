@@ -43,8 +43,8 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="4dp"
-            android:background="@drawable/ic_arrow_down"
-            style="@style/ImageViewButton"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_arrow_down"
             app:layout_constraintStart_toEndOf="@id/text_view_week_day"
             app:layout_constraintTop_toTopOf="@id/text_view_week_day" />
 
@@ -52,8 +52,8 @@
             android:id="@+id/button_notification"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:background="@drawable/ic_notification_off"
-            style="@style/ImageViewButton"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_notification_off"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,9 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/ubuntu_bold"
-            android:textSize="24sp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            style="@style/EventName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_view_date"
             tools:text="Что-то" />

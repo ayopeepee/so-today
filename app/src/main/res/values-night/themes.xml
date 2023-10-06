@@ -64,6 +64,14 @@
 
     <style name="EventName" parent="TextAppearance.AppCompat.Body1">
 
+        <item name="android:textSize">24sp</item>
+        <item name="fontFamily">@font/ubuntu_medium</item>
+        <item name="android:textColor">@color/primary_text_dark</item>
+
+    </style>
+
+    <style name="ItemEvent" parent="TextAppearance.AppCompat.Body1">
+
         <item name="android:textSize">14sp</item>
         <item name="fontFamily">@font/ubuntu_medium</item>
         <item name="android:textColor">@color/primary_text_dark</item>
@@ -79,7 +87,7 @@
 
     <style name="ImageViewButton" parent="Widget.AppCompat.ImageButton">
 
-        <item name="backgroundTint">@color/icons_dark</item>
+        <item name="android:tint">@color/icons_dark</item>
 
     </style>
 

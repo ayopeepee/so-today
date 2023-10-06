@@ -36,9 +36,9 @@
 
 
         <ImageButton
-            android:background="@drawable/ic_arrow_down"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_arrow_down"
             android:id="@+id/button_select_date"
-            style="@style/ImageViewButton"
             android:layout_height="24dp"
             android:layout_marginStart="4dp"
             android:layout_width="24dp"
